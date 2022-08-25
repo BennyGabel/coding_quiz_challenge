@@ -28,19 +28,30 @@ header p{
 
 .btn-group buttst {
     /*    display:block; */
-        border: 1px solid #024e76;
+    border: 1px solid #024e76;
+
+
+    cursor: pointer; 
+    position:relative;
+    width: 15%; 
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px; 
+    height: 30px;
+    background-color: indigo;
+    color: white;
+    text-align: left;
+}
+
+#timer #question {
+    margin-bottom: 0px; 
+    padding-bottom: 0px;
+    text-align:right;
+}
+
+#question_result {
+    font-size:2.00vw;
     
-    
-        cursor: pointer; 
-        position:relative;
-        width: 15%; 
-        display: block;
-        margin: 0 auto;
-        margin-bottom: 15px; 
-        height: 30px;
-        background-color: indigo;
-        color: white;
-        text-align: left;
 }
 
 /*[data-size="large"] {*/
@@ -54,3 +65,17 @@ header p{
     /*display:none;*/
 }
 
+[data-result="Good"] {
+    color:white;
+    background-color: rgb(4, 82, 4);
+}
+
+[data-result="Wrong"] {
+    color:white;
+    background-color: rgb(255, 0, 0);
+}
+
+[data-result="None"] {
+    color:white;
+    background-color: rgb(255, 255, 255);
+}

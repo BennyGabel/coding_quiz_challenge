@@ -1,41 +1,21 @@
-// var taskNameInput = document.querySelector('input[name="task-name"]') ;
-// console.log(taskNameInput);
-
-// var selectOption = document.querySelector('select[name="task-type"]');
-
 var Title = document.querySelector(".page-title"); 
 var Parg  = document.querySelector(".paragraph");
 
 var container = document.querySelector(".btn-group");   // get position/element for div class="btn-group"
-var start = document.querySelector("#start");
-var btn1  = document.querySelector("#option1");
-var btn2  = document.querySelector("#option2");
-var btn3  = document.querySelector("#option3");
-var btn4  = document.querySelector("#option4");
+var start     = document.querySelector("#start");
+var btn1      = document.querySelector("#option1");
+var btn2      = document.querySelector("#option2");
+var btn3      = document.querySelector("#option3");
+var btn4      = document.querySelector("#option4");
 
-var oTimer= document.querySelector("#timer");
+var oTimer    = document.querySelector("#timer");
+/*  Whish List - not implemented yet
+    var oquestion = document.querySelector("#question"); */
+var oResult   = document.querySelector("#question_result")
 
 var curQuestionIndex = 0;
 
 var nSecondsLeft = 60;
-
-/* Variables starting with "np" Numeric-Possition */
-// var npPage = 1 ;    
-// var npH1   = 2 ;
-// var npText = 3 ;
-// var npBtn1 = 4 ;
-// var npBtn2 = 5 ;
-// var npBtn3 = 6 ;
-// var npBtn4 = 7 ;
-// var npAnsw = 8 ;
-
-// var aPages = [1, "Coding Quiz Challenge", 
-// "Try to answer the following code--related questions within the time limit. Keep in mind that incorrect answers will penalize your socre/time by ten seconds",
-// "Start Quiz",
-// "",
-// "",
-// "",
-// 0]
 
 var questions = [
     {   questionNumber: 1,
@@ -70,9 +50,9 @@ var questions = [
         h1: "",
         option1: "1. commas",
         option2: "2. curly brackets",  
-        option3: "3. booleans", 
-        option4: "4. all of the above", 
-        answer : "4"
+        option3: "3. quotes", 
+        option4: "4. parenthesis", 
+        answer : "3"
     } ,
     {   questionNumber: 5,
         question: "A very useful tool used during edvelopment and debugging for printing content to the debugger is:",
@@ -86,23 +66,9 @@ var questions = [
 ]
 
 function f_timer() {
-    nSecondsLef--
-    oTimer.innerHTML = nSecondsLef
+    nSecondsLeft --;
+    oTimer.innerHTML = nSecondsLeft + " second left";
 }
-
-/*
- function setButtons (fElement, fText) {
-     fElement.innerHTML = fText;
-     if (fText === "") {
-         fElement.setAttribute("data-state", "hidden");
-         fElement.disabled = true;
-         // fElement.setAttribute("disabled"  , true);
-     } else {
-         fElement.setAttribute("data-state", "visible");
-         fElement.disabled = false;        
-//         // fElement.setAttribute("disabled"  , false);
-     }
-*/
 
 
 function setElements(pnQuestion) {
@@ -112,8 +78,10 @@ function setElements(pnQuestion) {
     btn2.innerHTML =  questions[pnQuestion]['option2'];
     btn3.innerHTML =  questions[pnQuestion]['option3'];
     btn4.innerHTML =  questions[pnQuestion]['option4'];
-}
 
+    /* Whish List - not implemented yet
+       oquestion.innerHTML = 'Question ' + pnQuestion + ' of 5'; */
+}
 
 
 container.addEventListener("click", function(event) {
@@ -124,23 +92,50 @@ container.addEventListener("click", function(event) {
     if (element.matches(".button")) {
         answerSel = element.dataset.number ;
 
-        var msg = "Correct Answer: " + questions[curQuestionIndex]['answer'] + 
-            "   User's answer " + answerSel ;
-        alert(msg);
+        checkAnswer( questions[curQuestionIndex]['answer'], answerSel);
 
-        // checkAnswer( answerSel;
-            //container.removeEventListener("click");
+        // var msg = "Correct Answer: " + questions[curQuestionIndex]['answer'] + 
+        //     "   User's answer " + answerSel ;
+        // alert(msg);
 
+        // // checkAnswer( answerSel;
+        //     //container.removeEventListener("click");
+
+        // curQuestionIndex++
+        // if (curQuestionIndex<4) {
+        //     setElements(curQuestionIndex);   // nCurQuestion);
+        // } else {
+        //     // End of Array
+        // }
+    }
+})
+
+function checkAnswer(pnRightAnswer, pnUserAnswer) {
+    // alert(msg);
+    if (pnRightAnswer==pnUserAnswer) {
+        oResult.innerHTML = "Correct!!"
+        oResult.setAttribute("data-result", "Good");
+    } else {
+        oResult.innerHTML = "Incorrect"
+        oResult.setAttribute("data-result", "Wrong");
+    }
+
+    // 1 second delay
+    setTimeout(function(){
+        oResult.innerHTML = ""
+        oResult.setAttribute("data-result", "None");
+    
         curQuestionIndex++
-        if (curQuestionIndex<4) {
+        if (curQuestionIndex<5) {
             setElements(curQuestionIndex);   // nCurQuestion);
         } else {
             // End of Array
         }
-    }
-})
+    }, 1000);
+    
 
-function checkAnswer() {
+    
+
 }
 
 
@@ -149,27 +144,8 @@ function nextQuestion() {
 }
 
 function startQuiz() {
-    // var nCurQuestion = 1;
-
-    nQuerstionAry = 0;
     timerStart = setInterval(f_timer, 1000);
-
-    // Title.innerHTML=  questions[nCurQuestion][question];
-    // Parg.innerHTML =  aPages[nIndex+2];
-
-    // for (var loopQuestion = 0;  loopQuestion+=; loopQuestion<=4) {
-
-    // for (var nQuestion=0; nQuestion<=4; nQuestion++) {
-    // nQuestion =0;    
-    //getQuestion
-
-
-    setElements(curQuestionIndex);   // nCurQuestion);
-    //checkAnswer(curQuestionIndex, );
-
-
- 
-    //}
+    setElements(curQuestionIndex);   
 }
 
     
@@ -196,6 +172,16 @@ start.addEventListener("click", function(event) {
     startQuiz();
     // Call startquiz
 });
+
+
+
+
+// code kept for future references // 
+// =============================== //
+// var taskNameInput = document.querySelector('input[name="task-name"]') ;
+// console.log(taskNameInput);
+
+// var selectOption = document.querySelector('select[name="task-type"]');
 
 
 /* /* 22.08.24  9:10
