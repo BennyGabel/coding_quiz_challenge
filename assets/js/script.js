@@ -1,6 +1,8 @@
+var oForm = document.querySelector(".task-form"); 
 var Title = document.querySelector(".page-title"); 
 var Parg  = document.querySelector(".paragraph");
 
+var oQuestions= document.querySelector(".questionnaire");
 var container = document.querySelector(".btn-group");   // get position/element for div class="btn-group"
 var start     = document.querySelector("#start");
 var btn1      = document.querySelector("#option1");
@@ -13,9 +15,14 @@ var oTimer    = document.querySelector("#timer");
     var oquestion = document.querySelector("#question"); */
 var oResult   = document.querySelector("#question_result")
 
+
+
 var curQuestionIndex = 0;
+var nCorrect  = 0;
 
 var nSecondsLeft = 60;
+var lTimeOut  = Boolean(false);
+
 
 var questions = [
     {   questionNumber: 1,
@@ -65,9 +72,30 @@ var questions = [
     } 
 ]
 
+function displayscore() {
+    // Make   <div class="questionnaire">  inviible
+    oQuestions.style.display = "none";
+    clearInterval(f_timer);  // Clear/Stop Timer interval
+
+    // p1 = document.createElement("li");
+    // p1.innerHTML = "All Done!!"
+
+    h1 = document.createElement("h1");
+    h1.innerText = "All Done!!";
+    oForm.appendChild(h1);
+
+}
+
 function f_timer() {
     nSecondsLeft --;
-    oTimer.innerHTML = nSecondsLeft + " second left";
+    if (nSecondsLeft>0) {
+        oTimer.innerHTML = nSecondsLeft + " second left";
+    } else {
+        oTimer.innerHTML = "TIME OUT !!!"
+        oTimer.style.color = 'red';
+        lTimeOut = true;
+        displayscore()
+    }
 }
 
 
@@ -93,20 +121,6 @@ container.addEventListener("click", function(event) {
         answerSel = element.dataset.number ;
 
         checkAnswer( questions[curQuestionIndex]['answer'], answerSel);
-
-        // var msg = "Correct Answer: " + questions[curQuestionIndex]['answer'] + 
-        //     "   User's answer " + answerSel ;
-        // alert(msg);
-
-        // // checkAnswer( answerSel;
-        //     //container.removeEventListener("click");
-
-        // curQuestionIndex++
-        // if (curQuestionIndex<4) {
-        //     setElements(curQuestionIndex);   // nCurQuestion);
-        // } else {
-        //     // End of Array
-        // }
     }
 })
 
@@ -115,9 +129,12 @@ function checkAnswer(pnRightAnswer, pnUserAnswer) {
     if (pnRightAnswer==pnUserAnswer) {
         oResult.innerHTML = "Correct!!"
         oResult.setAttribute("data-result", "Good");
+        nCorrect ++;
     } else {
         oResult.innerHTML = "Incorrect"
         oResult.setAttribute("data-result", "Wrong");
+        // Penalty for Wrong answer
+        nSecondsLeft = nSecondsLeft - 10;
     }
 
     // 1 second delay
@@ -125,32 +142,24 @@ function checkAnswer(pnRightAnswer, pnUserAnswer) {
         oResult.innerHTML = ""
         oResult.setAttribute("data-result", "None");
     
+        // Move to next question
         curQuestionIndex++
         if (curQuestionIndex<5) {
+            // Display next question on 
             setElements(curQuestionIndex);   // nCurQuestion);
         } else {
-            // End of Array
+            // End of 5th question
+            displayscore()
         }
     }, 1000);
-    
-
-    
-
 }
 
 
-function nextQuestion() {
-
-}
 
 function startQuiz() {
     timerStart = setInterval(f_timer, 1000);
     setElements(curQuestionIndex);   
 }
-
-    
-
-
 
 start.addEventListener("click", function(event) {
     alert("start hit");
