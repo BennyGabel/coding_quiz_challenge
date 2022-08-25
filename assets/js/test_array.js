@@ -58,3 +58,7 @@ for (var i=0; i<=4; i++) {
     console.log(curQuestion);
 
 }
+
+alert("For Each");
+questions.forEach() 
+    console.log(question);
