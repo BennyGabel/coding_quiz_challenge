@@ -185,8 +185,6 @@ function startQuiz() {
 }
 
 start.addEventListener("click", function(event) {
-    alert("start hit");
-
     // start.parentNode.removeChild(start);
     start.setAttribute("data-state", "hidden");
     start.disabled = true;
