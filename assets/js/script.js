@@ -13,6 +13,12 @@ var btn2  = document.querySelector("#option2");
 var btn3  = document.querySelector("#option3");
 var btn4  = document.querySelector("#option4");
 
+var oTimer= document.querySelector("#timer");
+
+var curQuestionIndex = 0;
+
+var nSecondsLeft = 60;
+
 /* Variables starting with "np" Numeric-Possition */
 // var npPage = 1 ;    
 // var npH1   = 2 ;
@@ -78,7 +84,12 @@ var questions = [
         answer : "4"
     } 
 ]
-                    
+
+function f_timer() {
+    nSecondsLef--
+    oTimer.innerHTML = nSecondsLef
+}
+
 /*
  function setButtons (fElement, fText) {
      fElement.innerHTML = fText;
@@ -105,38 +116,60 @@ function setElements(pnQuestion) {
 
 
 
+container.addEventListener("click", function(event) {
+    event.preventDefault();
+        
+    var element = event.target;
+
+    if (element.matches(".button")) {
+        answerSel = element.dataset.number ;
+
+        var msg = "Correct Answer: " + questions[curQuestionIndex]['answer'] + 
+            "   User's answer " + answerSel ;
+        alert(msg);
+
+        // checkAnswer( answerSel;
+            //container.removeEventListener("click");
+
+        curQuestionIndex++
+        if (curQuestionIndex<4) {
+            setElements(curQuestionIndex);   // nCurQuestion);
+        } else {
+            // End of Array
+        }
+    }
+})
+
+function checkAnswer() {
+}
+
+
+function nextQuestion() {
+
+}
+
 function startQuiz() {
     // var nCurQuestion = 1;
 
-     nQuerstionAry = 0;
+    nQuerstionAry = 0;
+    timerStart = setInterval(f_timer, 1000);
 
     // Title.innerHTML=  questions[nCurQuestion][question];
     // Parg.innerHTML =  aPages[nIndex+2];
 
     // for (var loopQuestion = 0;  loopQuestion+=; loopQuestion<=4) {
 
-    for (var nQuestion=0; nQuestion<=4; nQuestion++) {
-        setElements(nQuestion);   // nCurQuestion);
-
-        container.addEventListener("click", function(event) {
-//        event.preventDefault();
-        
-        var element = event.target;
-
-        if (element.matches(".button")) {
-            answerSel = element.dataset.number ;
-
-            var msg = "Correct Answer: " + questions[1]['answer'] + 
-            "   User's answer " + answerSel ;
-
-            //container.removeEventListener("click");
+    // for (var nQuestion=0; nQuestion<=4; nQuestion++) {
+    // nQuestion =0;    
+    //getQuestion
 
 
-        alert( msg) ;
+    setElements(curQuestionIndex);   // nCurQuestion);
+    //checkAnswer(curQuestionIndex, );
 
-            // setElements(2);   // nCurQuestion);
-        }
-    })}
+
+ 
+    //}
 }
 
     
