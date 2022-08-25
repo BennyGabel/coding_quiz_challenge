@@ -1,6 +1,7 @@
-var oForm = document.querySelector(".task-form"); 
-var Title = document.querySelector(".page-title"); 
-var Parg  = document.querySelector(".paragraph");
+var oForm     = document.querySelector(".task-form"); 
+var oScore    = document.querySelector(".showscore"); 
+var Title     = document.querySelector(".page-title"); 
+var Parg      = document.querySelector(".paragraph");
 
 var oQuestions= document.querySelector(".questionnaire");
 var container = document.querySelector(".btn-group");   // get position/element for div class="btn-group"
@@ -74,15 +75,33 @@ var questions = [
 
 function displayscore() {
     // Make   <div class="questionnaire">  inviible
-    oQuestions.style.display = "none";
-    clearInterval(f_timer);  // Clear/Stop Timer interval
+    oQuestions.style.display = "none";   // Hide it
+    oScore.style.display     = "block";  // Make it visible
 
-    // p1 = document.createElement("li");
-    // p1.innerHTML = "All Done!!"
+    /* NOTE:
 
-    h1 = document.createElement("h1");
+       clearInterval() should clear the variable, not the function
+
+    */
+    //   clearInterval(f_timer);     DOESN'T WORK   1st Attempt
+    clearInterval(timerStart);        // After contacting Learning Assistant
+
+
+
+    h1   = document.createElement("h1");
     h1.innerText = "All Done!!";
-    oForm.appendChild(h1);
+    oScore.appendChild(h1);
+
+    p1   = document.createElement("p");
+    p1.innerText = "Your final score is " + (nCorrect*20) ;
+    oForm.appendChild(p1);
+
+    // lbl1 = document.createElement("LABEL");
+    // lbl1.innerText = "Your final score is" + (nCorrect*20) ;
+    // <label for="fname">First name:</label>
+    // <input type="text" id="fname" name="fname"><br><br>
+
+
 
 }
 
@@ -91,10 +110,14 @@ function f_timer() {
     if (nSecondsLeft>0) {
         oTimer.innerHTML = nSecondsLeft + " second left";
     } else {
-        oTimer.innerHTML = "TIME OUT !!!"
-        oTimer.style.color = 'red';
-        lTimeOut = true;
-        displayscore()
+        if (lTimeOut) {
+
+        } else {
+            oTimer.innerHTML = "TIME OUT !!!"
+            oTimer.style.color = 'red';
+            lTimeOut = true;
+            displayscore()
+        }
     }
 }
 
