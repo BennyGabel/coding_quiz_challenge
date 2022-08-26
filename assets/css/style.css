@@ -9,6 +9,12 @@ header p{
     padding-bottom: 20px;
 }
 
+.showScore header p{
+    font-size:1.00vw;
+    text-align:center;
+    /* padding-bottom: 20px; */
+}
+
 .btn-group button {
 /*    display:block; */
     border: 1px solid #024e76;
@@ -53,6 +59,7 @@ header p{
     font-size:2.00vw;
     
 }
+
 
 /*[data-size="large"] {*/
 [data-state="visible"] {

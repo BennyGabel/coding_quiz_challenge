@@ -1,25 +1,28 @@
-var oForm     = document.querySelector(".task-form"); 
-var oScore    = document.querySelector(".showscore"); 
-var Title     = document.querySelector(".page-title"); 
-var Parg      = document.querySelector(".paragraph");
+var oForm       = document.querySelector(".task-form"); 
+var oScore      = document.querySelector(".showScore"); 
+var uScore      = document.querySelector("#yourScore"); 
+var usrInitials = document.querySelector("#uSubmitInitials");
+var Title       = document.querySelector(".page-title"); 
+var Parg        = document.querySelector(".paragraph");
 
-var oQuestions= document.querySelector(".questionnaire");
-var container = document.querySelector(".btn-group");   // get position/element for div class="btn-group"
-var start     = document.querySelector("#start");
-var btn1      = document.querySelector("#option1");
-var btn2      = document.querySelector("#option2");
-var btn3      = document.querySelector("#option3");
-var btn4      = document.querySelector("#option4");
+var oQuestions  = document.querySelector(".questionnaire");
+var container   = document.querySelector(".btn-group");   // get position/element for div class="btn-group"
+var start       = document.querySelector("#start");
+var btn1        = document.querySelector("#option1");
+var btn2        = document.querySelector("#option2");
+var btn3        = document.querySelector("#option3");
+var btn4        = document.querySelector("#option4");
 
-var oTimer    = document.querySelector("#timer");
+var oTimer      = document.querySelector("#timer");
 /*  Whish List - not implemented yet
     var oquestion = document.querySelector("#question"); */
-var oResult   = document.querySelector("#question_result")
+var oResult     = document.querySelector("#question_result")
 
 
 
 var curQuestionIndex = 0;
 var nCorrect  = 0;
+var totalScore= 0;
 
 var nSecondsLeft = 60;
 var lTimeOut  = Boolean(false);
@@ -73,7 +76,18 @@ var questions = [
     } 
 ]
 
-function displayscore() {
+function saveScore() {
+    var scoreItem = {user: }
+}
+
+usrInitials.addEventListener("click", function(event) {
+    event.preventDefault()
+    alert("Are we done?");
+    oScore.style.display     = "none";  
+    saveScore()
+})
+
+function displayscore(nCorrect) {
     // Make   <div class="questionnaire">  inviible
     oQuestions.style.display = "none";   // Hide it
     oScore.style.display     = "block";  // Make it visible
@@ -88,6 +102,10 @@ function displayscore() {
 
 
 
+    // 22.08.26 Created <div class='showScore'> with all elements inside
+
+    // 22.08.26 Will not create elements here
+    /*
     h1   = document.createElement("h1");
     h1.innerText = "All Done!!";
     oScore.appendChild(h1);
@@ -95,11 +113,28 @@ function displayscore() {
     p1   = document.createElement("p");
     p1.innerText = "Your final score is " + (nCorrect*20) ;
     oForm.appendChild(p1);
+    */
+   // 22.08.26 Will not create elements here
+   
+   if(ncorrect>0) {
+     totalScore =  nCorrect*20;
+   } else {
+     totalScore = 0
+   }
 
-    // lbl1 = document.createElement("LABEL");
-    // lbl1.innerText = "Your final score is" + (nCorrect*20) ;
-    // <label for="fname">First name:</label>
-    // <input type="text" id="fname" name="fname"><br><br>
+   }
+   uScore.innerHTML = "Your final score is " + (totalScore);
+
+// BEG - Get it off tje fisplayscore function
+//    usrInitials.addEventListener("click", function(event) {
+//         event.preventDefault()
+//         alert("Are we done?");
+//         oScore.style.display     = "none";  
+        
+// //    var element = event.target;
+
+//    })
+// END - Get it off tje fisplayscore function
 
 
 
@@ -116,7 +151,7 @@ function f_timer() {
             oTimer.innerHTML = "TIME OUT !!!"
             oTimer.style.color = 'red';
             lTimeOut = true;
-            displayscore()
+            displayscore(nCorrect)
         }
     }
 }
@@ -158,12 +193,15 @@ function checkAnswer(pnRightAnswer, pnUserAnswer) {
         oResult.setAttribute("data-result", "Wrong");
         // Penalty for Wrong answer
         nSecondsLeft = nSecondsLeft - 10;
+        nCorrect = nCorrect    // Do Nothing
     }
 
     // 1 second delay
-    setTimeout(function(){
+    // 22.08.26 Add "conts myTimeout = ""
+    const myTimeout = setTimeout(function(){
         oResult.innerHTML = ""
         oResult.setAttribute("data-result", "None");
+        clearTimeout(myTimeout);
     
         // Move to next question
         curQuestionIndex++
@@ -172,7 +210,7 @@ function checkAnswer(pnRightAnswer, pnUserAnswer) {
             setElements(curQuestionIndex);   // nCurQuestion);
         } else {
             // End of 5th question
-            displayscore()
+            displayscore(nCorrect)
         }
     }, 1000);
 }
