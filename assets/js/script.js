@@ -209,7 +209,6 @@ function saveAddScore(pcName, pnTotalScore) { // saveScore(pcName, pnTotalScore)
 
 usrInitials.addEventListener("click", function(event) {
     event.preventDefault()
-    alert("Are we done?");
     
     let cName = uInitial.value;
     // let totalScore = totalScore;
@@ -224,9 +223,6 @@ function displayscore(nCorrect) {
     oQuestions.style.display = "none";   // Hide it
     oScore.style.display     = "block";  // Make it visible
 
-    /* NOTE:
-       clearInterval() should clear the variable, not the function
-    */
     //   clearInterval(f_timer);     DOESN'T WORK   1st Attempt
     clearInterval(timerStart);        // After contacting Learning Assistant
 
@@ -235,38 +231,14 @@ function displayscore(nCorrect) {
     // 22.08.26 Created <div class='showScore'> with all elements inside
 
     // 22.08.26 Will not create elements here
-    /*
-    h1   = document.createElement("h1");
-    h1.innerText = "All Done!!";
-    oScore.appendChild(h1);
-    p1   = document.createElement("p");
-    p1.innerText = "Your final score is " + (nCorrect*20) ;
-    oForm.appendChild(p1);
-    */
-   // 22.08.26 Will not create elements here
    
-   if(nCorrect>0) {
-     totalScore =  nCorrect*20;
-   } else {
-     totalScore = 0
-   }
+    if(nCorrect>0) {
+      totalScore =  nCorrect*20;
+    } else {
+      totalScore = 0
+    }
 
-   
-   uScore.innerHTML = "Your final score is " + (totalScore);
-
-// BEG - Get it off tje fisplayscore function
-//    usrInitials.addEventListener("click", function(event) {
-//         event.preventDefault()
-//         alert("Are we done?");
-//         oScore.style.display     = "none";  
-        
-// //    var element = event.target;
-
-//    })
-// END - Get it off tje fisplayscore function
-
-
-
+    uScore.innerHTML = "Your final score is " + (totalScore);
 }
 
 function f_timer() {

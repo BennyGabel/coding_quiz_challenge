@@ -72,14 +72,40 @@ HTML.
   - question_result   Indicate if answer was correct or incorrect
 2 showscore     class DIV
   - show socres
-  - User initials     NOT DONE YET
-  - Show high score   NOT DONE YET
+  - User initials     
+  - Sugmit Button
+3 High Score
+  - Class high_uScore 
+    * Elements in it will be created/removed dynamically
+  - Class high_uButtons     Will have two buttons
+    * Go Back         Start 
+    * Clear Scores
+  
 
 Javascript - js     Please note, am explaining the processes and functions in the way how appeared in the program, not in order of execution
 --------------------------------------------------------------------------------------------------------------------------------------------
 * Assigns elements
 * Create an array of all questions
-* displayscore()      Last function called
+
+- getAllScore         - Extract all Scores from localStorage
+* startAgain.Click    - Start the webpage again
+* clearScores.Click   - Empty localStorage.quizScore
+                        > remove elements h1 and li from scrteen
+                        > h1    page header
+                        > li
+* displayAllScore     - get all scores 
+                      - sort the values by score - descending   (call function sort())
+                      - creates
+                        > h1    page header
+                        > br    break line
+                        > li
+* saveAddScore        - Extract existing scores
+                      - Add current user/score to array
+                      - Update information into localStoreage.quizScore
+* usrInitials         Call saveAddScore - passes as parameters Name, totalScore
+* displayscore()      - Indicates users score
+                      - Allow user Enter his initials
+                      - Submit button (option) usrInitials
 * f_timer()           Computer the seconds left. If all the seconds were used, will call displayscore()
 * setElements()       Assigned values to the screen elements. Receive as parameter question #
 * Click-EventListener Receive the element/button clicked. 
