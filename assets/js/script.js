@@ -101,10 +101,11 @@ function dispayAllScore() {
     var highScore = sort();
     //console.log(highScore);
 
-    hScore.display     = "block";  // Make it visible
+    hScore.style     = "display:block";  // Make it visible
+
     var hd = document.createElement("h1"); 
     hd.textContent  = "Scores:"     // <h1>High Scores</h1>
-    hScore.appendChild(hd);
+    hScore.append(hd);
 
     for (var i=0; i<highScore.length; i++) {
         var item = highScore[i];
