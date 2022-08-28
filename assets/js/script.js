@@ -91,12 +91,13 @@ function getAllScore() { // getAlHighScore() {
     }
 }
 
-function extractAllScore() {
+function dispayAllScore() {
     var allScore = getAllScore();     // getHighScore() ;
 
     var highScore = sort();
+    console.log(highScore);
 
-    hScore
+    //hScore
 
 }
 
@@ -107,7 +108,7 @@ function sort() {
         return;
     } else {
         unsortLst.sort(function(a,b){
-            return b[i] - a[i];
+            return b - a;
         })
     }
     
@@ -129,6 +130,8 @@ function saveAddScore(pcName, pnTotalScore) { // saveScore(pcName, pnTotalScore)
 
     // Store complete information back into localStorage
     localStorage.setItem("quizScore", JSON.stringify(allScore));
+
+    dispayAllScore();
 
 }
 
