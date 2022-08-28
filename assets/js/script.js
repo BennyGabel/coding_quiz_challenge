@@ -85,36 +85,55 @@ function getAllScore() { // getAlHighScore() {
     // Evaluate if there is information stored in lavalStorage
     if (currentList  !== null) {
         savedList = JSON.parse(currentList);
-        return savedList;
+        // return savedList;
     } else {
-        return [];
+        savedList = [];
+        // return [];
     }
+
+    return savedList;
+
 }
 
 function dispayAllScore() {
     var allScore = getAllScore();     // getHighScore() ;
 
     var highScore = sort();
-    console.log(highScore);
+    //console.log(highScore);
 
-    //hScore
+    hScore.display     = "block";  // Make it visible
+    var hd = document.createElement("h1"); 
+    hd.textContent  = "Scores:"     // <h1>High Scores</h1>
+    hScore.appendChild(hd);
+
+    for (var i=0; i<highScore.length; i++) {
+        var item = highScore[i];
+        
+        var li = document.createElement("li");
+        li.textContent = item.user + " - " + item.score ;
+        li.setAttribute("data-index", i);
+        hScore.appendChild(li);
+    }
+    
 
 }
 
 function sort() {
     var unsortLst = getAllScore();
     console.log(unsortLst);
-    
-    if (unsortLst == null) {
+
+    if (unsortLst == null) {unsortLst
         return;
     } else {
         unsortLst.sort(function(a,b){
-            console.log(b);
-            console.log(a);
+            console.log(b.score);
+            console.log(a.score);
 
-            return b - a;
+            return b.score - a.score;
         })
     }
+
+    return unsortLst;
     
 
 }
@@ -125,6 +144,10 @@ function saveAddScore(pcName, pnTotalScore) { // saveScore(pcName, pnTotalScore)
 
     // Call funtion to return from Loal Storage, and almacenate information in  allHighScore
     var allScore = getAllScore();     // getHighScore() ;
+
+    if (allScore == null){
+        allScore = [];
+    }
 
     // Convert current User & High Score into an object
     const obj = {user: pcName, score: pnTotalScore}
