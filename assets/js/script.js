@@ -1,5 +1,6 @@
 var oForm       = document.querySelector(".task-form"); 
 var oScore      = document.querySelector(".showScore"); 
+var hScore      = document.querySelector(".highScore");
 var uScore      = document.querySelector("#yourScore"); 
 var uInitial    = document.querySelector("#uInitials")
 var usrInitials = document.querySelector("#uSubmitInitials");
@@ -77,10 +78,11 @@ var questions = [
     } 
 ]
 
-function getHighScore() {
+function getAllScore() { // getAlHighScore() {
     // Get values from localStorage into variable  "currentList"
     var currentList = localStorage.getItem("quizScore");
 
+    // Evaluate if there is information stored in lavalStorage
     if (currentList  !== null) {
         savedList = JSON.parse(currentList);
         return savedList;
@@ -89,24 +91,44 @@ function getHighScore() {
     }
 }
 
+function extractAllScore() {
+    var allScore = getAllScore();     // getHighScore() ;
+
+    var highScore = sort();
+
+    hScore
+
+}
+
+function sort() {
+    var unsortLst = getAllScore();
+    
+    if (unsortLst == null) {
+        return;
+    } else {
+        unsortLst.sort(function(a,b){
+            return b[i] - a[i];
+        })
+    }
+    
+
+}
 
 function saveAddScore(pcName, pnTotalScore) { // saveScore(pcName, pnTotalScore) {
 //    var scoreItem = {user: }
 //    alert('hey   saveScore' );
 
     // Call funtion to return from Loal Storage, and almacenate information in  allHighScore
-    var allHighScore = getHighScore() ;
+    var allScore = getAllScore();     // getHighScore() ;
 
     // Convert current User & High Score into an object
     const obj = {user: pcName, score: pnTotalScore}
     
     // Add Current use/Score to the saved list
-    allHighScore.push(obj);
+    allScore.push(obj);
 
     // Store complete information back into localStorage
-    localStorage.setItem("quizScore", JSON.stringify(allHighScore));
-
-
+    localStorage.setItem("quizScore", JSON.stringify(allScore));
 
 }
 
