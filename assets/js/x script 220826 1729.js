@@ -1,8 +1,8 @@
 var oForm       = document.querySelector(".task-form"); 
 var oScore      = document.querySelector(".showScore"); 
 var uScore      = document.querySelector("#yourScore"); 
-var uInitial    = document.querySelector("#uInitials")
-var usrInitials = document.querySelector("#uSubmitInitials");
+var usrInitials = document.querySelector("#uInitials");
+var subInitials = document.querySelector("#uSubmitInitials");
 var Title       = document.querySelector(".page-title"); 
 var Parg        = document.querySelector(".paragraph");
 
@@ -24,7 +24,7 @@ var oResult     = document.querySelector("#question_result")
 var curQuestionIndex = 0;
 var nCorrect  = 0;
 var totalScore= 0;
-    
+
 var nSecondsLeft = 60;
 var lTimeOut  = Boolean(false);
 
@@ -77,51 +77,40 @@ var questions = [
     } 
 ]
 
-function getHighScore() {
-    // Get values from localStorage into variable  "currentList"
-    var currentList = localStorage.getItem("quizScore");
+function saveScore() {
+    var name = usrInitials.innerHTML
+    const obj = {user: name, score: totalScore}
+    alert(obj);
 
-    if (currentList  !== null) {
-        savedList = JSON.parse(currentList);
-        return savedList;
-    } else {
-        return [];
-    }
-}
+/*
+    const obj = {name: "John", age: function () {return 30;}, city: "New York"};
+    obj.age = obj.age.toString();
+    const myJSON = JSON.stringify(obj);
 
 
-function saveAddScore(pcName, pnTotalScore) { // saveScore(pcName, pnTotalScore) {
-//    var scoreItem = {user: }
-//    alert('hey   saveScore' );
-
-    // Call funtion to return from Loal Storage, and almacenate information in  allHighScore
-    var allHighScore = getHighScore() ;
-
-    // Convert current User & High Score into an object
-    const obj = {user: pcName, score: pnTotalScore}
-    
-    // Add Current use/Score to the saved list
-    allHighScore.push(obj);
-
-    // Store complete information back into localStorage
-    localStorage.setItem("quizScore", JSON.stringify(allHighScore));
-
-
+    var scoreItem = {"user":usrInitials.innerHTML, "score":totalScore}
+*/
 
 }
 
 
-usrInitials.addEventListener("click", function(event) {
-    event.preventDefault()
-    alert("Are we done?");
-    
-    let cName = uInitial.value;
-    // let totalScore = totalScore;
-    
-    oScore.style.display     = "none";  
-    
-    saveAddScore(cName, totalScore)
-})
+/*
+if (oScore == null) {
+    // Do Nothing
+} else {
+    // If Object is not null
+//IF (oScore.style.display === undefined) {
+
+//IF (oScore !== null && oScore !== undefined) {
+// if (oScore.style.display = "block") {
+    subInitials.addEventListener("click", function(event) {
+        event.preventDefault()
+        alert("Are we done?");
+        oScore.style.display     = "none";  
+        saveScore()
+    })
+}
+*/
 
 function displayscore(nCorrect) {
     // Make   <div class="questionnaire">  inviible
@@ -129,7 +118,9 @@ function displayscore(nCorrect) {
     oScore.style.display     = "block";  // Make it visible
 
     /* NOTE:
+
        clearInterval() should clear the variable, not the function
+
     */
     //   clearInterval(f_timer);     DOESN'T WORK   1st Attempt
     clearInterval(timerStart);        // After contacting Learning Assistant
@@ -143,30 +134,29 @@ function displayscore(nCorrect) {
     h1   = document.createElement("h1");
     h1.innerText = "All Done!!";
     oScore.appendChild(h1);
+
     p1   = document.createElement("p");
     p1.innerText = "Your final score is " + (nCorrect*20) ;
     oForm.appendChild(p1);
     */
-   // 22.08.26 Will not create elements here
-   
-   if(nCorrect>0) {
-     totalScore =  nCorrect*20;
-   } else {
-     totalScore = 0
-   }
+    // 22.08.26 Will not create elements here
+    if (nCorrect>0) {
+        totalScore =  nCorrect*20;
+    } else {
+        totalScore = 0
+    }
 
-   
-   uScore.innerHTML = "Your final score is " + (totalScore);
+    uScore.innerHTML = "Your final score is " + (totalScore);
 
 // BEG - Get it off tje fisplayscore function
-//    usrInitials.addEventListener("click", function(event) {
-//         event.preventDefault()
-//         alert("Are we done?");
-//         oScore.style.display     = "none";  
+    usrInitials.addEventListener("click", function(event) {
+        event.preventDefault()
+        alert("Are we done?");
+        oScore.style.display     = "none";  
         
 // //    var element = event.target;
 
-//    })
+    })
 // END - Get it off tje fisplayscore function
 
 
@@ -289,22 +279,39 @@ start.addEventListener("click", function(event) {
 // Start in Page # 1
     container.addEventListener("click", function(event) {
         var element = event.target;
+
         if (element.matches(".button")) {
 //    if (element.matches(".button") &&
 //        (element.datastate.state=="visible")) {
+
             // if (element.matches("#start")) {
                     //     alert("Lets star");
                     //     setButtons(start, "")
+
                     // } else {
                 // (element.matches("#option"))
+
             alert("answer hit");
+
+
+
                     // }
+
+
+
         }
+
+
             
     })
+
  
+
 //}
+
 22.08.24  9:10   */
+
+
 
 
 
