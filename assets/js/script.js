@@ -103,11 +103,15 @@ function dispayAllScore() {
 
 function sort() {
     var unsortLst = getAllScore();
+    console.log(unsortLst);
     
     if (unsortLst == null) {
         return;
     } else {
         unsortLst.sort(function(a,b){
+            console.log(b);
+            console.log(a);
+
             return b - a;
         })
     }
