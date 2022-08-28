@@ -32,6 +32,50 @@ header p{
     text-align: left;
 }
 
+
+.btn-group button {
+/*    display:block; */
+    border: 1px solid #024e76;
+
+
+    cursor: pointer; 
+    position:relative;
+    width: 15%; 
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 15px; 
+    height: 30px;
+    background-color: indigo;
+    color: white;
+    text-align: left;
+}
+
+
+
+/* High Score - screen */
+.high_uButtons button {
+/*    display:block; */
+    border: 1px solid #024e76;
+
+
+    cursor: pointer; 
+    position: relative;
+
+    
+    width: auto;
+    display: block; 
+    display: flex;
+    flex-direction:row;
+
+    margin: 0 auto;
+    margin-bottom: 15px;  
+    
+    height: 30px;
+    background-color: indigo;
+    color: white;
+    text-align: left;
+}
+
 .btn-group buttst {
     /*    display:block; */
     border: 1px solid #024e76;

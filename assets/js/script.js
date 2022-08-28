@@ -1,6 +1,7 @@
 var oForm       = document.querySelector(".task-form"); 
 var oScore      = document.querySelector(".showScore"); 
 var hScore      = document.querySelector(".highScore");
+var husrScore   = document.querySelector(".high_uScore");
 var uScore      = document.querySelector("#yourScore"); 
 var uInitial    = document.querySelector("#uInitials")
 var usrInitials = document.querySelector("#uSubmitInitials");
@@ -14,6 +15,9 @@ var btn1        = document.querySelector("#option1");
 var btn2        = document.querySelector("#option2");
 var btn3        = document.querySelector("#option3");
 var btn4        = document.querySelector("#option4");
+
+var startAgain  = document.querySelector("#startAgain");
+var clearScores = document.querySelector("#ClearScores");
 
 var oTimer      = document.querySelector("#timer");
 /*  Whish List - not implemented yet
@@ -95,6 +99,39 @@ function getAllScore() { // getAlHighScore() {
 
 }
 
+
+startAgain.addEventListener("click", function(event) {
+    startQuiz()    
+})
+
+
+clearScores.addEventListener("click", function(event) {
+    event.preventDefault()
+    localStorage.setItem('quizScore', 'null') 
+
+    // Remove h1
+    var curh1 = husrScore.querySelectorAll("h1"); 
+    curh1.forEach(function(item) {
+        husrScore.removeChild(item);
+    })
+    
+    // // Remove br
+    // var curbr = husrScore.querySelectorAll("br"); 
+    // curbr1.forEach(function(item) {
+    //     husrScore.removeChild(item);
+    // })
+
+    // Remove li
+    var curLi = husrScore.querySelectorAll("li"); 
+    curLi.forEach(function(item) {
+        husrScore.removeChild(item);
+    })
+
+    dispayAllScore()
+})
+
+
+
 function dispayAllScore() {
     var allScore = getAllScore();     // getHighScore() ;
 
@@ -105,15 +142,24 @@ function dispayAllScore() {
 
     var hd = document.createElement("h1"); 
     hd.textContent  = "Scores:"     // <h1>High Scores</h1>
-    hScore.append(hd);
+    //hd.textContent  = "Scores:" + "<br/><br/>"    // <h1>High Scores</h1>
+    //hScore.append(hd);
+    husrScore.append(hd);
+
+    var br = document.createElement("br"); 
+    husrScore.append(br);
+    husrScore.append(br);
+
 
     for (var i=0; i<highScore.length; i++) {
         var item = highScore[i];
         
         var li = document.createElement("li");
         li.textContent = item.user + " - " + item.score ;
+        // li.textContent = substring(item.user+"             ", 1, 10) +  + " - " + item.score ;    ERROR
         li.setAttribute("data-index", i);
-        hScore.appendChild(li);
+        husrScore.appendChild(li);   // hScore.appendChild(li);
+
     }
     
 
@@ -121,16 +167,13 @@ function dispayAllScore() {
 
 function sort() {
     var unsortLst = getAllScore();
-    console.log(unsortLst);
+    //console.log(unsortLst);
 
     if (unsortLst == null) {unsortLst
         return;
     } else {
         unsortLst.sort(function(a,b){
-            console.log(b.score);
-            console.log(a.score);
-
-            return b.score - a.score;
+        return b.score - a.score;
         })
     }
 
