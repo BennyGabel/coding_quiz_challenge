@@ -30,11 +30,6 @@ Start Page
 Questions and Answers section
 Display Users scode
 
-** This project is not completed **
-# Missing sections:
-- Accespt user's initial
-- Show/Store High Scores
-
 # How to use this project 
 As the user open the URL, will have to press a button to start
 Once the Start button is clicked:
