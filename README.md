@@ -18,7 +18,8 @@ link to the repository:  https://github.com/BennyGabel/coding_quiz_challenge/tre
 
 Including in project:    Screenshot #1.jpg      Start Page
                          Screenshot #2.jpg      Question Page, applies to questions 1-5
-                         Screenshot #3.jpg      Score Displayed
+                         Screenshot #3.jpg      Score Displayed. Enter Initials. Submit.
+                         Screenshot #4.jpg      List of all Scores. Buttons: Go back & Clear scores
 
 
 # description
